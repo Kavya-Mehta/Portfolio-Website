@@ -24,6 +24,8 @@ const SKILL_GROUPS = [
       "HTML/CSS",
       "JavaScript",
       "React",
+      "C#",
+      "Typescript",
       "AWS",
       "S3",
       "Lambda",
