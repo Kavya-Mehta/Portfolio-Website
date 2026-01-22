@@ -1,7 +1,16 @@
 import { config } from "../config";
 import { useInView } from "../hooks/useInView";
 
-const techChips = ["Python", "SQL", "AWS", "Tableau", "React", "Terraform"];
+const techChips = [
+  "Python",
+  "SQL",
+  "C#",
+  "Typescript",
+  "AWS",
+  "Tableau",
+  "React",
+  "Terraform",
+];
 
 const socials = [
   {
