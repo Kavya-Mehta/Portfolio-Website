@@ -1,0 +1,90 @@
+const GITHUB = "https://github.com/Kavya-Mehta";
+
+export const projects = [
+  {
+    id: "cinematic",
+    title: "AI-Driven Cinematic Storytelling Pipeline",
+    period: "Sep 2025 – Oct 2025",
+    tech: ["Python", "Pandas", "NumPy", "OpenCV", "Generative AI", "Jupyter"],
+    highlights: [
+      "Designed a Python-based creative data pipeline that reimagines a classic fashion film as a psychological horror narrative through logic-driven storytelling",
+      "Automated scene sequencing, dialogue transformation, and narrative pacing using Python scripting and rule-based workflows",
+      "Generated cinematic visuals using image processing techniques with PIL and OpenCV, enhanced by generative AI models",
+      "Applied data manipulation and visualization techniques to support emotion-driven narrative experimentation and creative analysis",
+      "Awarded Best Innovation in Creative Coding and Storytelling Excellence as part of INFO 6105 coursework",
+    ],
+    alwaysExpanded: true,
+    links: [
+      { label: "View Code", url: `${GITHUB}/Data-Science-Movie-Project` },
+    ],
+    size: "medium",
+  },
+  {
+    id: "movie",
+    title: "Movie Analytics Data Pipeline",
+    period: "Jan 2026 – Feb 2026",
+    tech: ["Databricks", "Alteryx", "ER Studio", "Power BI"],
+    highlights: [
+      "Building end-to-end data pipeline processing 7 IMDb datasets with 10M+ records using Medallion architecture in Databricks",
+      "Implementing data profiling and quality validation in Alteryx, tracking lineage from source to target systems",
+      "Designing dimensional data model in ER Studio with fact and dimension tables for movie analytics and crew analysis",
+      "Developing ETL workflows to unify multi-language titles, regional releases, and crew relationships across disparate sources",
+      "Creating Power BI dashboards for movie trends, ratings analysis, genre comparisons, regional insights, episode metrics, etc.",
+    ],
+    alwaysExpanded: true,
+    links: [],
+    size: "large",
+  },
+  {
+    id: "f1",
+    title: "F1 Championship Bayesian Predictor",
+    period: "Nov 2025 – Dec 2025",
+    tech: ["Python", "PyMC", "Statistical Modeling"],
+    highlights: [
+      "Built Bayesian hierarchical model using PyMC to predict 2025 F1 Championship standings for 20 drivers and 10 constructors",
+      "Processed season data from 23 races including qualifying, sprint results, and weather conditions, establishing prior distributions updated with real-time data",
+      "Executed Monte Carlo simulations generating probabilistic predictions with 72% accuracy for podium finishes",
+    ],
+    alwaysExpanded: true,
+    links: [],
+    size: "medium",
+  },
+  {
+    id: "aws",
+    title: "AWS Cloud Infrastructure Setup",
+    period: "Jan 2025 – Apr 2025",
+    tech: ["AWS", "Terraform", "Networking"],
+    highlights: [
+      "Deployed CI/CD pipeline with GitHub Actions, Packer, and Terraform reducing manual deployment effort by 60% and ensuring reliable, production-ready cloud deployments",
+      "Provisioned secure AWS infrastructure across 3 availability zones and configured CloudWatch Agent in AMIs for monitoring 15+ metrics",
+      "Enabled auto-scaling with Launch Templates and Auto Scaling Groups using CPU utilization-based policies",
+      "Deployed Application Load Balancer to evenly distribute HTTP traffic across 4 EC2 instances and ensure 99.9% application fault tolerance",
+      "Configured Route 53 with domain and subdomains (dev/demo) for DNS-based access and secure, load balanced routing",
+    ],
+    alwaysExpanded: true,
+    unifiedRepos: [
+      { label: "Cloud App", url: `${GITHUB}/Cloud-Native-Webapp` },
+      { label: "Infra", url: `${GITHUB}/aws-terraform-infra` },
+    ],
+    size: "large",
+  },
+  {
+    id: "portfolio",
+    title: "Interactive Portfolio Website",
+    period: "Jan 2026",
+    tech: ["React", "Vite", "CSS3", "JavaScript"],
+    highlights: [
+      "Built responsive portfolio website with React and Vite featuring smooth scroll animations and section tracking",
+      "Implemented dark/light theme toggle with localStorage persistence for seamless user preference management",
+      "Designed custom scroll progress indicator and back-to-top navigation for enhanced UX",
+      "Created modular component architecture with hooks for intersection observer and active section detection",
+      "Optimized performance with lazy loading, CSS animations, and semantic HTML structure",
+    ],
+    alwaysExpanded: true,
+    links: [
+      { label: "Live Site", url: "#hero" },
+      { label: "GitHub", url: `${GITHUB}/portfolio` },
+    ],
+    size: "medium",
+  },
+];
