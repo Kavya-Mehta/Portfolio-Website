@@ -5,7 +5,7 @@ const EDUCATION = [
     school: "Northeastern University",
     degree: "Master of Science",
     field: "Information Systems",
-    period: "2024 - 2026",
+    period: "Sep 2024 - Apr 2026",
     location: "Boston, MA",
     highlights: [
       "Data Science Engineering",
