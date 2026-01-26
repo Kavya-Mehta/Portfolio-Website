@@ -6,24 +6,12 @@ const EXPERIENCE = [
     role: "Data Engineer",
     type: "Internship",
     period: "Jan 2024 - Jun 2024",
-    description: [
-      "Designed and built scalable ETL pipelines processing 10,000+ monthly records using Python and SQL, implementing comprehensive data validation frameworks and quality monitoring systems",
-      "Developed dimensional data models and optimized database performance achieving improvement in query execution time, supporting analytics workflows for cross-functional business teams",
-      "Collaborated with stakeholders to translate business requirements into technical data solutions, creating automated workflows that streamlined data processing and reporting operations",
-      "Implemented data governance practices including documentation, lineage tracking, and metadata management, establishing foundation for reliable data-driven decision making",
-    ],
   },
   {
     company: "Vartak Computers",
     role: "Web Development Intern",
     type: "Internship",
     period: "May 2021 - Oct 2021",
-    description: [
-      "Developed REST APIs in Python/Flask handling requests, implementing authentication, validation, and error handling for production web applications",
-      "Built responsive web interfaces using JavaScript, HTML/CSS integrated with MySQL databases, delivering real-time data visualization capabilities",
-      "Optimized database connections and SQL query performance improving application response times through efficient backend architecture and indexing strategies",
-      "Implemented automated deployment workflows and version control practices, ensuring reliable code delivery and system maintenance for client-facing applications",
-    ],
   },
 ];
 
@@ -48,13 +36,6 @@ export default function Experience() {
             <p className="experience__company">{item.company}</p>
             {item.period !== "—" && (
               <p className="experience__period">{item.period}</p>
-            )}
-            {item.description && (
-              <ul className="experience__bullets">
-                {item.description.map((point, idx) => (
-                  <li key={idx}>{point}</li>
-                ))}
-              </ul>
             )}
           </div>
         ))}
@@ -139,18 +120,6 @@ export default function Experience() {
           color: var(--text-muted);
           font-size: 0.85rem;
           margin-top: 0.25rem;
-        }
-        .experience__bullets {
-          margin: 0.75rem 0 0;
-          padding-left: 1.1rem;
-          display: grid;
-          gap: 0.5rem;
-          color: var(--text-muted);
-          line-height: 1.55;
-          font-size: 0.95rem;
-        }
-        .experience__bullets li {
-          position: relative;
         }
         @media (max-width: 640px) {
           .experience__card {
