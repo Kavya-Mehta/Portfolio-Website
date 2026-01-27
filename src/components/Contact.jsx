@@ -45,14 +45,6 @@ export default function Contact() {
             GitHub
           </a>
         </div>
-        <a
-          href={config.resumePath}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="contact__resume"
-        >
-          View Resume
-        </a>
       </div>
       <footer className="contact__footer">
         <p>
@@ -155,26 +147,6 @@ export default function Contact() {
           transform: translateY(-4px);
           box-shadow: 0 10px 24px var(--accent-glow);
           border-color: var(--accent-hover);
-        }
-        .contact__resume {
-          display: inline-block;
-          padding: 0.85rem 1.8rem;
-          background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-          color: #0c0f14;
-          border-radius: 12px;
-          font-weight: 800;
-          font-size: 0.95rem;
-          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-          position: relative;
-          z-index: 1;
-          overflow: hidden;
-          border: 2px solid var(--accent);
-          box-shadow: 0 8px 24px var(--accent-glow);
-        }
-        .contact__resume:hover {
-          background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%);
-          transform: translateY(-6px);
-          box-shadow: 0 16px 48px var(--accent-glow);
         }
         .contact__footer {
           text-align: center;

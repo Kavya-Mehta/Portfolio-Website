@@ -10,34 +10,25 @@ A creative, interactive portfolio built with **React** and **Vite**. Sections: H
    npm install
    ```
 
-2. **Add resume** (for public access when deployed)
-
-   - Place `resume.pdf` in `public/`. It will be served at `/resume.pdf` (e.g. `https://yoursite.com/resume.pdf`).
-
-3. **Optional: custom profile image**
-
+2. **Optional: custom profile image**
    - Default profile image is your **GitHub avatar** (always publicly accessible).
    - To use a custom photo: put `profile.jpg` in `public/` and set `profileImage: '/profile.jpg'` in `src/config.js`.
 
-4. **Edit `src/config.js`**
-
+3. **Edit `src/config.js`**
    - `name`, `tagline`, `email`, `linkedin`, `github` — update as needed.
-   - `resumePath`: `/resume.pdf` (or another path if you host the resume elsewhere).
    - `profileImage`: defaults to GitHub avatar; override for a custom image.
 
-5. **Run locally**
+4. **Run locally**
 
    ```bash
    npm run dev
    ```
 
-6. **Build & deploy**
+5. **Build & deploy**
 
    ```bash
    npm run build
    ```
-
-   Deploy the `dist/` folder to **Vercel**, **Netlify**, **GitHub Pages**, etc. Ensure `resume.pdf` and any custom assets are in `public/` so they’re included in `dist/`.
 
 ## Projects
 

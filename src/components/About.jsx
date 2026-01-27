@@ -55,14 +55,6 @@ export default function About() {
             challenges and help build the next generation of innovative software
             solutions.
           </p>
-          <a
-            href={config.resumePath}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="about__resume"
-          >
-            Download Resume →
-          </a>
         </div>
       </div>
       <style>{`
@@ -114,24 +106,6 @@ export default function About() {
         .about__lead { font-size: 1.15rem; color: var(--text); font-weight: 600; line-height: 1.6; }
         .about__lead strong { color: var(--accent); }
         .about__text p { color: var(--text-muted); line-height: 1.7; }
-        .about__resume {
-          margin-top: 0.5rem;
-          font-weight: 600;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.25rem;
-          transition: all 0.2s ease;
-          padding: 0.6rem 1rem;
-          background: var(--accent-muted);
-          border-radius: 8px;
-          width: fit-content;
-          color: var(--accent);
-        }
-        .about__resume:hover { 
-          transform: translateX(6px);
-          color: var(--accent-hover);
-          background: rgba(34, 211, 238, 0.25);
-        }
       `}</style>
     </section>
   );

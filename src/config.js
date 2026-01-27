@@ -9,6 +9,5 @@ export const config = {
   linkedin: "https://www.linkedin.com/in/mehta-kavya/",
   github: GITHUB_USER,
   githubUrl: GITHUB_URL,
-  resumePath: "/KAVYA-MEHTA-RESUME.pdf",
   profileImage: `https://github.com/${GITHUB_USER}.png`,
 };

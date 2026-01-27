@@ -54,15 +54,6 @@ export default function Navbar({ scrolled, activeSection, theme, setTheme }) {
               {LABELS[id]}
             </a>
           ))}
-          <a
-            href={config.resumePath}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open resume in a new tab"
-            className="navbar__cta"
-          >
-            Resume
-          </a>
           <button
             type="button"
             className="navbar__theme-toggle"
@@ -197,22 +188,6 @@ export default function Navbar({ scrolled, activeSection, theme, setTheme }) {
           background: var(--accent-muted);
           box-shadow: 0 4px 16px var(--accent-glow);
         }
-        .navbar__cta {
-          margin-top: 0.5rem;
-          padding: 0.6rem 1rem;
-          background: var(--accent);
-          color: #0c0f14 !important;
-          border-radius: 8px;
-          text-align: center;
-          font-weight: 600;
-          transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-        }
-        .navbar__cta:hover {
-          background: var(--accent-hover);
-          transform: translateY(-1px);
-          box-shadow: 0 4px 16px var(--accent-glow);
-          color: #0c0f14 !important;
-        }
         @media (min-width: 768px) {
           .navbar__toggle { display: none; }
           .navbar__nav {
@@ -224,7 +199,6 @@ export default function Navbar({ scrolled, activeSection, theme, setTheme }) {
             padding: 0;
             gap: 0.25rem;
           }
-          .navbar__cta { margin-top: 0; margin-left: 0.5rem; }
           .navbar__link {
             padding: 0.5rem 0.75rem;
           }
