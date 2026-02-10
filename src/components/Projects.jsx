@@ -1,25 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useInView } from "../hooks/useInView";
 import { projects } from "../data/projects";
 
-function ProjectCard({ project, index, inView }) {
-  const [expanded, setExpanded] = useState(project.alwaysExpanded || false);
-  const hasHighlights = project.highlights?.length > 0;
-  const showMore =
-    !project.alwaysExpanded &&
-    hasHighlights &&
-    project.highlights.length > 2 &&
-    !expanded;
-  const previewCount = Math.min(2, project.highlights?.length ?? 0);
-  const hasUnified = project.unifiedRepos?.length > 0;
-  const hasLinks = project.links?.length > 0;
+function ProjectCard({ project, index, inView, onReadMore }) {
+  const summary = project.summary || project.highlights?.[0];
 
   return (
     <article
       className={`project-card project-card--${project.size} project-card--${project.id} ${inView ? "project-card--visible" : ""}`}
       style={{ "--i": index }}
     >
-      <div className="project-card__inner">
+      <div className="project-card__surface">
         <div className="project-card__header">
           <span className="project-card__period">{project.period}</span>
           <h3 className="project-card__title">{project.title}</h3>
@@ -32,62 +24,16 @@ function ProjectCard({ project, index, inView }) {
           </div>
         </div>
         <div className="project-card__body">
-          {hasHighlights && (
-            <ul className="project-card__highlights">
-              {(expanded
-                ? project.highlights
-                : project.highlights.slice(0, previewCount)
-              ).map((h, i) => (
-                <li key={i}>{h}</li>
-              ))}
-            </ul>
-          )}
-          {showMore && (
-            <button
-              type="button"
-              className="project-card__more"
-              onClick={() => setExpanded(true)}
-              aria-expanded={expanded}
-            >
-              Read more
-            </button>
-          )}
+          {summary && <p className="project-card__summary">{summary}</p>}
         </div>
-        <div className="project-card__links">
-          {hasUnified ? (
-            <div className="project-card__unified">
-              <span className="project-card__unified-label">
-                2 repos · 1 project
-              </span>
-              <div className="project-card__segmented">
-                {project.unifiedRepos.map(({ label, url }) => (
-                  <a
-                    key={url}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-card__segmented-link"
-                  >
-                    {label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          ) : hasLinks ? (
-            project.links.map(({ label, url }) => (
-              <a
-                key={url}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-card__link"
-              >
-                {label}
-              </a>
-            ))
-          ) : (
-            <span className="project-card__coming">Link coming soon</span>
-          )}
+        <div className="project-card__footer">
+          <button
+            type="button"
+            className="project-card__readmore"
+            onClick={() => onReadMore(project)}
+          >
+            Read more
+          </button>
         </div>
       </div>
     </article>
@@ -96,6 +42,16 @@ function ProjectCard({ project, index, inView }) {
 
 export default function Projects() {
   const [ref, inView] = useInView({ threshold: 0.08 });
+  const [activeProject, setActiveProject] = useState(null);
+
+  useEffect(() => {
+    if (activeProject) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+    return () => document.body.classList.remove("modal-open");
+  }, [activeProject]);
 
   return (
     <section
@@ -103,27 +59,120 @@ export default function Projects() {
       id="projects"
       ref={ref}
     >
-      <h2 className="section-title projects__title">
-        <span>Projects</span>
-      </h2>
-      <div className="projects__grid">
-        {projects.map((p, i) => (
-          <ProjectCard key={p.id} project={p} index={i} inView={inView} />
-        ))}
+      <div className="projects__layout">
+        <div className="projects__intro">
+          <h2 className="section-title projects__title">
+            <span>Projects</span>
+          </h2>
+        </div>
+        <div className="projects__grid">
+          {projects.map((p, i) => (
+            <ProjectCard
+              key={p.id}
+              project={p}
+              index={i}
+              inView={inView}
+              onReadMore={setActiveProject}
+            />
+          ))}
+        </div>
       </div>
+      {activeProject &&
+        createPortal(
+          <div
+            className="projects__modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${activeProject.title} details`}
+            onClick={() => setActiveProject(null)}
+          >
+            <div
+              className="projects__modal-card"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="projects__modal-close"
+                onClick={() => setActiveProject(null)}
+                aria-label="Close"
+              >
+                ×
+              </button>
+              <div className="projects__modal-header">
+                <h3 className="projects__modal-title">{activeProject.title}</h3>
+                <span className="projects__modal-period">
+                  {activeProject.period}
+                </span>
+              </div>
+              {activeProject.tech?.length > 0 && (
+                <div className="projects__modal-tech">
+                  {activeProject.tech.map((t) => (
+                    <span key={t} className="project-card__tag">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+              {activeProject.highlights?.length > 0 && (
+                <ul className="projects__modal-list">
+                  {activeProject.highlights.map((h, i) => (
+                    <li key={i}>{h}</li>
+                  ))}
+                </ul>
+              )}
+              <div className="projects__modal-links">
+                {activeProject.unifiedRepos?.length > 0 ? (
+                  <div className="project-card__segmented">
+                    {activeProject.unifiedRepos.map(({ label, url }) => (
+                      <a
+                        key={url}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-card__segmented-link"
+                      >
+                        {label}
+                      </a>
+                    ))}
+                  </div>
+                ) : activeProject.links?.length > 0 ? (
+                  activeProject.links.map(({ label, url }) => (
+                    <a
+                      key={url}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-card__link"
+                    >
+                      {label}
+                    </a>
+                  ))
+                ) : (
+                  <span className="project-card__coming">Link coming soon</span>
+                )}
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
       <style>{`
-        .projects__inner {
-          height: 100%;
+        body.modal-open {
+          overflow: hidden;
+        }
+        .projects__layout {
           display: flex;
           flex-direction: column;
-          overflow: hidden;
+          gap: 2rem;
+        }
+        .projects__intro {
+          position: relative;
         }
         .projects__title { margin-bottom: 2rem; }
         .projects__grid {
           display: grid;
           gap: 1.25rem;
           grid-template-columns: 1fr;
-          grid-auto-rows: auto;
+          grid-auto-rows: 1fr;
         }
         @media (min-width: 640px) {
           .projects__grid {
@@ -156,22 +205,22 @@ export default function Projects() {
         @media (prefers-reduced-motion: reduce) {
           .project-card { transition: none; opacity: 1; transform: none; }
           .project-card--visible { opacity: 1; transform: none; }
+          .project-card__surface { transition: none; }
         }
-        .project-card__inner {
+        .project-card__surface {
           height: 100%;
           display: flex;
           flex-direction: column;
-          background: rgba(19, 24, 31, 0.4);
+          background: linear-gradient(180deg, rgba(96, 165, 250, 0.08), transparent 60%), var(--bg-card);
           border: 1px solid var(--border);
-          border-radius: 16px;
+          border-radius: 18px;
           padding: 2rem;
-          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-          backdrop-filter: blur(12px);
+          transition: all 0.25s ease;
           position: relative;
           overflow: hidden;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
         }
-        .project-card__inner::before {
+        .project-card__surface::before {
           content: '';
           position: absolute;
           top: 0;
@@ -182,7 +231,7 @@ export default function Projects() {
           opacity: 0;
           transition: opacity 0.3s ease;
         }
-        .project-card__inner::after {
+        .project-card__surface::after {
           content: '';
           position: absolute;
           inset: 0;
@@ -191,25 +240,31 @@ export default function Projects() {
           transition: opacity 0.3s ease;
           pointer-events: none;
         }
-        .project-card:hover .project-card__inner {
+        .project-card:hover .project-card__surface {
           border-color: var(--accent);
-          box-shadow: 0 24px 56px var(--accent-glow);
-          transform: translateY(-12px);
-          background: rgba(34, 211, 238, 0.06);
+          box-shadow: 0 14px 26px rgba(15, 23, 42, 0.14);
+          background: var(--bg-card-hover);
         }
-        .project-card:hover .project-card__inner::before {
+        .project-card:hover .project-card__surface::before {
           opacity: 1;
         }
-        .project-card:hover .project-card__inner::after {
+        .project-card:hover .project-card__surface::after {
           opacity: 0.1;
         }
-        .project-card__header { margin-bottom: 1rem; }
+        .project-card__header {
+          margin-bottom: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
         .project-card__period {
           font-size: 0.8rem;
-          color: var(--accent);
+          position: relative;
           font-weight: 500;
           display: block;
-          margin-bottom: 0.35rem;
+          color: var(--accent);
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
         }
         .project-card__title {
           font-size: 1.15rem;
@@ -227,7 +282,7 @@ export default function Projects() {
           padding: 0.3rem 0.6rem;
           background: var(--accent-muted);
           color: var(--accent);
-          border-radius: 6px;
+          border-radius: 8px;
           border: 1px solid var(--accent);
           font-weight: 500;
           transition: all 0.2s ease;
@@ -235,58 +290,43 @@ export default function Projects() {
         }
         .project-card__tag:hover {
           background: var(--accent);
-          color: #0c0f14;
-          transform: scale(1.05);
+          color: #fff;
+          transform: translateY(-2px);
         }
         .project-card__body { 
           flex: 1; 
-          overflow: hidden;
+          overflow: visible;
           display: flex;
           flex-direction: column;
         }
-        .project-card__highlights {
-          list-style: none;
-          font-size: 0.9rem;
+        .project-card__summary {
           color: var(--text-muted);
-          line-height: 1.55;
-          overflow: hidden;
-          margin: 0;
-          padding: 0;
+          font-size: 0.92rem;
+          line-height: 1.6;
+          margin-bottom: 0.85rem;
         }
-        .project-card__highlights li {
-          position: relative;
-          padding-left: 1rem;
-          margin-bottom: 0.4rem;
-        }
-        .project-card__highlights li::before {
-          content: '●';
-          position: absolute;
-          left: 0;
-          color: var(--accent);
-          font-size: 0.5rem;
-          top: 0.4em;
-        }
-        .project-card__more {
-          margin-top: 0.5rem;
-          background: none;
-          border: none;
-          color: var(--accent);
-          font-size: 0.9rem;
-          font-weight: 500;
-          cursor: pointer;
-          padding: 0;
-          text-decoration: underline;
-          transition: color 0.2s;
-        }
-        .project-card__more:hover { color: var(--accent-hover); }
-        .project-card__links {
+        .project-card__footer {
           margin-top: 1rem;
           padding-top: 1rem;
           border-top: 1px solid var(--border);
           display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
           align-items: center;
+          justify-content: flex-start;
+        }
+        .project-card__readmore {
+          font-size: 0.85rem;
+          padding: 0.35rem 0.75rem;
+          background: var(--accent-muted);
+          color: var(--accent);
+          border-radius: 8px;
+          border: 1px solid var(--accent);
+          cursor: pointer;
+          transition: background 0.2s, transform 0.2s, color 0.2s;
+        }
+        .project-card__readmore:hover {
+          background: var(--accent);
+          color: #fff;
+          transform: translateY(-1px);
         }
         .project-card__unified {
           width: 100%;
@@ -315,7 +355,7 @@ export default function Projects() {
         }
         .project-card__segmented-link:hover {
           background: var(--accent);
-          color: white;
+          color: #fff;
           transform: translateY(-1px);
         }
         .project-card__link {
@@ -328,7 +368,7 @@ export default function Projects() {
         }
         .project-card__link:hover {
           background: var(--accent);
-          color: white;
+          color: #fff;
           transform: translateY(-1px);
         }
         .project-card__coming {
@@ -336,9 +376,93 @@ export default function Projects() {
           color: var(--text-muted);
           font-style: italic;
         }
+
+        .projects__modal {
+          position: fixed;
+          inset: 0;
+          background: rgba(2, 6, 23, 0.6);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem 1.5rem;
+          z-index: 2000;
+          backdrop-filter: blur(8px);
+        }
+        .projects__modal-card {
+          width: min(860px, 100%);
+          background: var(--bg-card);
+          border: 1px solid var(--border);
+          border-radius: 18px;
+          padding: 2rem;
+          position: relative;
+          box-shadow: var(--shadow-lg);
+          max-height: 80vh;
+          overflow: auto;
+        }
+        .projects__modal-close {
+          position: absolute;
+          top: 0.9rem;
+          right: 0.9rem;
+          border: none;
+          background: var(--accent-muted);
+          color: var(--accent);
+          width: 32px;
+          height: 32px;
+          border-radius: 999px;
+          cursor: pointer;
+          font-size: 1.2rem;
+          line-height: 1;
+        }
+        .projects__modal-header {
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+          margin-bottom: 1rem;
+        }
+        .projects__modal-title {
+          font-size: 1.35rem;
+          color: var(--text);
+        }
+        .projects__modal-period {
+          color: var(--accent);
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+        .projects__modal-tech {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.4rem;
+          margin-bottom: 1rem;
+        }
+        .projects__modal-list {
+          list-style: none;
+          color: var(--text-muted);
+          line-height: 1.6;
+          margin-bottom: 1.25rem;
+          padding: 0;
+        }
+        .projects__modal-list li {
+          position: relative;
+          padding-left: 1rem;
+          margin-bottom: 0.45rem;
+        }
+        .projects__modal-list li::before {
+          content: '●';
+          position: absolute;
+          left: 0;
+          color: var(--accent);
+          font-size: 0.5rem;
+          top: 0.4em;
+        }
+        .projects__modal-links {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          align-items: center;
+        }
         
         /* Compact styling for Movie Analytics Data Pipeline card */
-        .project-card--movie .project-card__inner {
+        .project-card--movie .project-card__surface {
           padding: 1.5rem;
         }
         .project-card--movie .project-card__header {
@@ -356,16 +480,7 @@ export default function Projects() {
         .project-card--movie .project-card__tag {
           padding: 0.25rem 0.5rem;
         }
-        .project-card--movie .project-card__highlights {
-          line-height: 1.5;
-        }
-        .project-card--movie .project-card__highlights li {
-          margin-bottom: 0.35rem;
-        }
-        .project-card--movie .project-card__more {
-          margin-top: 0.4rem;
-        }
-        .project-card--movie .project-card__links {
+        .project-card--movie .project-card__footer {
           margin-top: 0.75rem;
           padding-top: 0.75rem;
         }

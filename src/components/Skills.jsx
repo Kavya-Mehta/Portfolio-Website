@@ -61,24 +61,36 @@ export default function Skills() {
       id="skills"
       ref={ref}
     >
-      <h2 className="section-title">
-        <span>Skills</span>
-      </h2>
-      <div className="skills__grid">
-        {SKILL_GROUPS.map((group, i) => (
-          <div key={i} className="skills__group" style={{ "--i": i }}>
-            <h3 className="skills__title">{group.title}</h3>
-            <ul className="skills__list">
-              {group.items.map((skill, j) => (
-                <li key={j} className="skills__item">
-                  {skill}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      <div className="skills__layout">
+        <div className="skills__intro">
+          <h2 className="section-title">
+            <span>Skills</span>
+          </h2>
+        </div>
+        <div className="skills__grid">
+          {SKILL_GROUPS.map((group, i) => (
+            <div key={i} className="skills__group" style={{ "--i": i }}>
+              <h3 className="skills__title">{group.title}</h3>
+              <ul className="skills__list">
+                {group.items.map((skill, j) => (
+                  <li key={j} className="skills__item">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
       <style>{`
+        .skills__layout {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+        .skills__intro {
+          position: relative;
+        }
         .skills__grid {
           display: grid;
           gap: 1.25rem;
@@ -90,18 +102,17 @@ export default function Skills() {
           .skills__grid { grid-template-columns: repeat(3, 1fr); }
         }
         .skills__group {
-          background: rgba(19, 24, 31, 0.4);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 14px;
           padding: 1.5rem;
-          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transition: all 0.25s ease;
           transition-delay: calc(var(--i, 0) * 0.1s);
           opacity: 0;
           transform: translateY(16px);
-          backdrop-filter: blur(12px);
           position: relative;
           overflow: hidden;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
         }
         .skills__group::before {
           content: '';
@@ -129,9 +140,9 @@ export default function Skills() {
         }
         .skills__group:hover {
           border-color: var(--accent);
-          transform: translateY(-10px);
-          box-shadow: 0 20px 48px var(--accent-glow);
-          background: rgba(34, 211, 238, 0.05);
+          transform: translateY(-4px);
+          box-shadow: 0 14px 26px rgba(15, 23, 42, 0.14);
+          background: var(--bg-card-hover);
           transition-delay: 0s;
         }
         .skills__group:hover::before {
@@ -181,8 +192,8 @@ export default function Skills() {
         }
         .skills__item:hover {
           background: var(--accent);
-          color: #0c0f14;
-          transform: scale(1.05);
+          color: #fff;
+          transform: translateY(-2px);
           font-weight: 600;
         }
         @media (max-width: 640px) {

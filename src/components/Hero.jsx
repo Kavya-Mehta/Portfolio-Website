@@ -15,7 +15,7 @@ const techChips = [
 const socials = [
   {
     label: "GitHub",
-    href: "https://github.com/Kavya-Mehta",
+    href: config.githubUrl,
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.49 0-.24 0-.87 0-1.7-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.1-1.46-1.1-1.46-.9-.62.07-.61.07-.61 1 .07 1.52 1.02 1.52 1.02.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.02-2.69-.1-.25-.45-1.26.1-2.63 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.9-1.3 2.74-1.02 2.74-1.02.56 1.37.21 2.38.11 2.63.63.7 1.02 1.6 1.02 2.69 0 3.85-2.34 4.7-4.58 4.95.36.31.69.92.69 1.85 0 1.33 0 2.4 0 2.73 0 .27.18.58.69.48A10 10 0 0 0 12 2Z" />
@@ -24,10 +24,34 @@ const socials = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/mehta-kavya",
+    href: config.linkedin,
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M4.98 3.5a2.25 2.25 0 1 1 0 4.5 2.25 2.25 0 0 1 0-4.5ZM3 9h3.96v12H3V9Zm6.75 0H14v1.71h.05c.59-1.12 2.02-2.3 4.17-2.3 4.46 0 5.28 2.93 5.28 6.74V21H19.5v-5.25c0-1.25-.02-2.86-1.74-2.86-1.75 0-2.02 1.37-2.02 2.77V21h-3.96V9Z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Email",
+    href: `mailto:${config.email}`,
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M4 6h16v12H4z"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+        <path
+          d="m4 7 8 6 8-6"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
       </svg>
     ),
   },
@@ -41,118 +65,121 @@ const Hero = () => {
       <section id="hero" className="hero" ref={ref}>
         <div className="hero__grid" aria-hidden="true">
           {Array.from({ length: 6 }).map((_, index) => (
-            <span key={index} style={{ animationDelay: `${index * 0.12}s` }} />
+            <span key={index} />
           ))}
         </div>
 
         <div className="hero__wrapper">
-          <div className="hero__main">
-            <div className="hero__text hero__text--reveal">
-              <h1 className="hero__title">
-                Hi, I'm <span className="highlight">Kavya M</span>
-              </h1>
-              <p className="hero__tagline">
-                Data-driven engineer building resilient cloud analytics
-                experiences.
-              </p>
+          <div className="hero__top">
+            <div className="hero__main">
+              <div className="hero__text hero__text--reveal">
+                <h1 className="hero__title">
+                  <span className="hero__name">Kavya</span>
+                  <span className="hero__name hero__name--accent">Mehta</span>
+                </h1>
+                <p className="hero__tagline">
+                  Data-driven engineer building resilient cloud analytics
+                  experiences.
+                </p>
 
-              <div
-                className="hero__chips"
-                role="list"
-                aria-label="Core technologies"
-              >
-                {techChips.map((chip) => (
-                  <span key={chip} role="listitem" className="chip">
-                    {chip}
-                  </span>
-                ))}
-              </div>
-
-              <div className="hero__cta">
-                <a
-                  href="#projects"
-                  className="btn btn--ghost"
-                  aria-label="Skip to featured projects"
+                <div
+                  className="hero__chips"
+                  role="list"
+                  aria-label="Core technologies"
                 >
-                  <span>View Featured Projects</span>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M5 12h14"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="m12 5 7 7-7 7"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </div>
+                  {techChips.map((chip) => (
+                    <span key={chip} role="listitem" className="chip">
+                      {chip}
+                    </span>
+                  ))}
+                </div>
 
-              <div className="hero__socials" aria-label="Social links">
-                {socials.map((item) => (
+                <div className="hero__cta">
                   <a
-                    key={item.label}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-btn"
-                    aria-label={item.label}
+                    href="#contact"
+                    className="btn btn--primary"
+                    aria-label="Get in touch"
                   >
-                    {item.icon}
-                    <span>{item.label}</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M4 6h16v12H4z"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        fill="none"
+                      />
+                      <path
+                        d="m4 7 8 6 8-6"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        fill="none"
+                      />
+                    </svg>
+                    <span>Get in Touch</span>
                   </a>
-                ))}
+                  <a
+                    href="#projects"
+                    className="btn btn--ghost"
+                    aria-label="View featured projects"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M5 12h14"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        fill="none"
+                      />
+                      <path
+                        d="m12 5 7 7-7 7"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        fill="none"
+                      />
+                    </svg>
+                    <span>View Featured Projects</span>
+                  </a>
+                </div>
+
+                <div className="hero__socials" aria-label="Social links">
+                  {socials.map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-btn"
+                      aria-label={item.label}
+                    >
+                      {item.icon}
+                      <span className="sr-only">{item.label}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div
-            className={`hero__about ${inView ? "hero__about--visible" : ""}`}
-          >
-            <div className="hero__about-image-wrap">
-              <img
-                src={config.profileImage}
-                alt="Kavya Mehta"
-                className="hero__about-image"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = `https://github.com/${config.github}.png`;
-                  e.target.alt = "Profile";
-                }}
-              />
-              <div className="hero__about-frame" aria-hidden="true" />
-            </div>
-            <div className="hero__about-text">
-              <p className="hero__about-lead">
-                I'm a passionate <strong>software engineer</strong> and{" "}
-                <strong>data enthusiast</strong> with hands-on experience in{" "}
-                <strong>full-stack development</strong> and{" "}
-                <strong>scalable data solutions</strong> and{" "}
-                <strong>cloud technologies</strong>.
-              </p>
-              <p>
-                Currently pursuing my Master's in Information Systems at
-                Northeastern University (graduating April 2026). Through
-                internships at Shreeji Woodcraft and Vartak Computers, I've
-                built everything from REST APIs and responsive web applications
-                to ETL pipelines, optimized database performance, and created
-                solutions that turn complex data into actionable insights.
-              </p>
-              <p>
-                I love transforming raw data into meaningful stories—whether
-                it's building ETL workflows, designing data models, creating
-                interactive dashboards, or developing seamless user experiences.
-                I thrive at the intersection of software engineering and data
-                science, building solutions that not only work well but also
-                provide meaningful insights. My toolkit includes Python,
-                JavaScript, SQL, AWS, Databricks, and React.
-              </p>
+            <div
+              className={`hero__profile ${inView ? "hero__profile--visible" : ""}`}
+            >
+              <div className="hero__profile-image-wrap">
+                <img
+                  src={config.profileImage}
+                  alt="Kavya Mehta"
+                  className="hero__profile-image"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `https://github.com/${config.github}.png`;
+                    e.target.alt = "Profile";
+                  }}
+                />
+              </div>
               <div className="hero__meta">
                 <span>📊 Data Engineering</span>
                 <span>📈 Analytics</span>
@@ -162,13 +189,14 @@ const Hero = () => {
               </div>
             </div>
           </div>
+
         </div>
       </section>
       <style>{`
       .hero {
         position: relative;
         min-height: 90vh;
-        padding: 6rem 1.5rem 3.5rem;
+        padding: 9.5rem 1.5rem 3.5rem;
         display: flex;
         align-items: center;
         overflow: hidden;
@@ -179,7 +207,13 @@ const Hero = () => {
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 4rem;
+        gap: 3.5rem;
+      }
+      .hero__top {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 2.5rem;
+        align-items: center;
       }
       .hero__main {
         display: flex;
@@ -190,9 +224,6 @@ const Hero = () => {
         display: flex;
         flex-direction: column;
         gap: 1.25rem;
-        opacity: 0;
-        transform: translateY(18px);
-        animation: heroFadeIn 0.7s ease forwards;
       }
       .hero__eyebrow {
         display: inline-flex;
@@ -207,9 +238,23 @@ const Hero = () => {
         width: fit-content;
       }
       .hero__title {
-        font-size: clamp(2.2rem, 5vw, 3.2rem);
-        letter-spacing: -0.02em;
+        font-size: clamp(2.8rem, 6vw, 4rem);
+        letter-spacing: -0.03em;
         margin: 0;
+        line-height: 1.05;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .hero__name {
+        font-weight: 800;
+        color: var(--text);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .hero__name--accent {
+        color: var(--accent);
       }
       .highlight {
         background: linear-gradient(135deg, var(--accent), var(--accent-hover));
@@ -218,23 +263,25 @@ const Hero = () => {
         background-clip: text;
       }
       .hero__tagline {
-        font-size: 1rem;
-        line-height: 1.6;
+        font-size: 1.05rem;
+        line-height: 1.7;
         color: var(--text-muted);
         max-width: 640px;
+        text-align: center;
       }
       .hero__chips {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.65rem;
+        gap: 0.6rem;
+        justify-content: center;
       }
       .chip {
-        padding: 0.4rem 0.75rem;
+        padding: 0.35rem 0.75rem;
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(15, 23, 42, 0.4);
+        border: 1px solid rgba(148, 163, 184, 0.2);
         color: var(--text-muted);
-        font-size: 0.85rem;
+        font-size: 0.82rem;
         letter-spacing: 0.01em;
         transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
       }
@@ -247,6 +294,7 @@ const Hero = () => {
         display: flex;
         gap: 0.75rem;
         flex-wrap: wrap;
+        justify-content: center;
       }
       .btn {
         display: inline-flex;
@@ -271,9 +319,9 @@ const Hero = () => {
         box-shadow: 0 18px 40px var(--accent-glow);
       }
       .btn--ghost {
-        background: rgba(255, 255, 255, 0.04);
+        background: rgba(15, 23, 42, 0.5);
         color: var(--text);
-        border-color: var(--border);
+        border-color: rgba(148, 163, 184, 0.22);
       }
       .btn--ghost:hover {
         transform: translateY(-2px);
@@ -283,22 +331,32 @@ const Hero = () => {
       .hero__socials {
         display: flex;
         gap: 0.65rem;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 0.25rem;
       }
       .social-btn {
         display: inline-flex;
         align-items: center;
-        gap: 0.35rem;
-        padding: 0.5rem 0.8rem;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        gap: 0.4rem;
+        padding: 0.25rem;
+        border-radius: 6px;
+        background: transparent;
+        border: none;
         color: var(--text-muted);
         font-weight: 600;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         transition: transform 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
       }
-      .social-btn svg { width: 18px; height: 18px; }
+      .social-btn svg {
+        width: 22px;
+        height: 22px;
+        fill: currentColor;
+      }
+      .social-btn:hover {
+        color: var(--text);
+        transform: translateY(-2px);
+      }
       .social-btn:hover {
         color: var(--accent);
         border-color: var(--accent-muted);
@@ -306,90 +364,52 @@ const Hero = () => {
         transform: translateY(-2px);
       }
       
-      /* About Section Merged */
-      .hero__about {
-        display: grid;
-        gap: 2rem;
-        align-items: start;
+      .hero__profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
         opacity: 0;
-        transform: translateY(24px);
-        transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
       }
-      .hero__about--visible {
+      .hero__profile--visible {
         opacity: 1;
         transform: translateY(0);
       }
-      @media (min-width: 768px) {
-        .hero__about {
-          grid-template-columns: 240px 1fr;
-          gap: 2.5rem;
-        }
-      }
-      .hero__about-image-wrap {
+      .hero__profile-image-wrap {
         position: relative;
         width: 100%;
-        max-width: 240px;
+        max-width: 300px;
         margin: 0 auto;
-        animation: float-image 6s ease-in-out infinite;
       }
-      @keyframes float-image {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-8px); }
-      }
-      .hero__about-image {
+      .hero__profile-image {
         width: 100%;
         aspect-ratio: 1;
         object-fit: cover;
-        border-radius: 16px;
+        border-radius: 50%;
         display: block;
-        box-shadow: 0 8px 32px var(--accent-glow);
+        border: 4px solid rgba(37, 99, 235, 0.4);
+        box-shadow: 0 16px 40px rgba(2, 6, 23, 0.45);
         transition: box-shadow 0.3s ease;
       }
-      .hero__about-image:hover {
+      .hero__profile-image:hover {
         box-shadow: 0 16px 48px var(--accent-glow);
-      }
-      .hero__about-frame {
-        position: absolute;
-        inset: -6px;
-        border: 2px solid var(--accent);
-        border-radius: 18px;
-        opacity: 0.5;
-        z-index: -1;
-        animation: rotate-border 8s linear infinite;
-      }
-      @keyframes rotate-border {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-      .hero__about-text {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .hero__about-lead {
-        font-size: 1.05rem;
-        color: var(--text);
-        font-weight: 600;
-        line-height: 1.6;
-        margin: 0;
-      }
-      .hero__about-lead strong {
-        color: var(--accent);
-      }
-      .hero__about-text p {
-        color: var(--text-muted);
-        line-height: 1.65;
-        margin: 0;
-        font-size: 0.95rem;
       }
       .hero__meta {
         display: flex;
-        gap: 0.75rem;
         flex-wrap: wrap;
-        color: var(--text-muted);
+        justify-content: center;
+        gap: 0.5rem;
+      }
+      .hero__meta span {
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        background: var(--accent-muted);
+        color: var(--accent);
         font-weight: 600;
-        margin-top: 0.5rem;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+        border: 1px solid var(--accent);
       }
       
       .hero__grid {
@@ -399,10 +419,10 @@ const Hero = () => {
           linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px),
           linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px);
         background-size: 60px 60px;
-        opacity: 0.25;
+        opacity: 0.12;
         border-radius: 24px;
-        animation: rotate-grid 20s linear infinite;
         overflow: hidden;
+        pointer-events: none;
       }
       .hero__grid span {
         display: block;
@@ -412,8 +432,7 @@ const Hero = () => {
         border-radius: 50%;
         background: var(--accent-muted);
         filter: blur(60px);
-        opacity: 0.2;
-        animation: float 6s ease-in-out infinite;
+        opacity: 0.12;
       }
       .hero__grid span:nth-child(1) { top: 10%; left: 8%; }
       .hero__grid span:nth-child(2) { top: 20%; right: 12%; animation-duration: 7s; }
@@ -426,23 +445,18 @@ const Hero = () => {
         0% { transform: rotate(0deg); } 
         100% { transform: rotate(360deg); } 
       }
-      @keyframes float { 
-        0%, 100% { transform: translateY(0); } 
-        50% { transform: translateY(-12px); } 
-      }
-      @keyframes heroFadeIn { 
-        from { opacity: 0; transform: translateY(24px); } 
-        to { opacity: 1; transform: translateY(0); } 
-      }
       
       /* Mobile Responsive */
       @media (max-width: 640px) {
         .hero {
-          padding: 4.5rem 1rem 3rem;
+          padding: 7.5rem 1rem 3rem;
           min-height: auto;
         }
         .hero__wrapper {
           gap: 3rem;
+        }
+        .hero__top {
+          gap: 2rem;
         }
         .hero__title {
           font-size: 1.8rem;
@@ -457,10 +471,7 @@ const Hero = () => {
           width: 100%;
           justify-content: center;
         }
-        .hero__about {
-          gap: 1.5rem;
-        }
-        .hero__about-image-wrap {
+        .hero__profile-image-wrap {
           max-width: 200px;
         }
         .hero__about-text {
@@ -476,21 +487,54 @@ const Hero = () => {
       
       @media (max-width: 768px) {
         .hero {
-          padding: 6rem 1.25rem 3.5rem;
+          padding: 8rem 1.25rem 3.5rem;
         }
         .hero__socials {
           gap: 0.5rem;
-          flex-wrap: nowrap;
+          flex-wrap: wrap;
         }
         .social-btn {
           padding: 0.45rem 0.7rem;
           font-size: 0.8rem;
         }
       }
+      @media (min-width: 900px) {
+        .hero__top {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          gap: 4rem;
+        }
+        .hero__main {
+          flex: 1.1;
+        }
+        .hero__profile {
+          flex: 0.9;
+        }
+        .hero__title,
+        .hero__tagline,
+        .hero__chips,
+        .hero__cta,
+        .hero__socials {
+          justify-content: flex-start;
+          text-align: left;
+        }
+      }
+      @media (min-width: 900px) {
+        .hero__top {
+          grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+        }
+        .hero__profile {
+          align-items: flex-end;
+        }
+        .hero__meta {
+          justify-content: flex-end;
+        }
+      }
       
       @media (min-width: 900px) {
         .hero {
-          padding: 6.5rem 2rem 5rem;
+          padding: 10.5rem 2rem 5rem;
         }
         .hero__wrapper {
           gap: 5rem;

@@ -23,41 +23,53 @@ export default function Experience() {
       id="experience"
       ref={ref}
     >
-      <h2 className="section-title">
-        <span>Experience</span>
-      </h2>
-      <div className="experience__list">
-        {EXPERIENCE.map((item, i) => (
-          <div key={i} className="experience__card" style={{ "--i": i }}>
-            <div className="experience__header">
-              <h3 className="experience__role">{item.role}</h3>
-              <span className="experience__type">{item.type}</span>
+      <div className="experience__layout">
+        <div className="experience__intro">
+          <h2 className="section-title">
+            <span>Experience</span>
+          </h2>
+        </div>
+        <div className="experience__list">
+          {EXPERIENCE.map((item, i) => (
+            <div key={i} className="experience__card" style={{ "--i": i }}>
+              <div className="experience__header">
+                <h3 className="experience__role">{item.role}</h3>
+                <span className="experience__type">{item.type}</span>
+              </div>
+              <p className="experience__company">{item.company}</p>
+              {item.period !== "—" && (
+                <p className="experience__period">{item.period}</p>
+              )}
             </div>
-            <p className="experience__company">{item.company}</p>
-            {item.period !== "—" && (
-              <p className="experience__period">{item.period}</p>
-            )}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       <style>{`
+        .experience__layout {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+        .experience__intro {
+          position: relative;
+        }
         .experience__list { 
           display: flex; 
           flex-direction: column; 
           gap: 1.25rem; 
         }
         .experience__card {
-          background: rgba(19, 24, 31, 0.5);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 14px;
           padding: 1.5rem;
-          transition: all 0.3s ease;
+          transition: all 0.25s ease;
           transition-delay: calc(var(--i, 0) * 0.1s);
           opacity: 0;
           transform: translateY(16px);
-          backdrop-filter: blur(10px);
           position: relative;
           overflow: hidden;
+          box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
         }
         .experience__card::before {
           content: '';
@@ -75,10 +87,10 @@ export default function Experience() {
           transform: translateY(0);
         }
         .experience__card:hover {
-          background: rgba(34, 211, 238, 0.08);
+          background: var(--bg-card-hover);
           border-color: var(--accent);
-          transform: translateY(-6px);
-          box-shadow: 0 12px 40px var(--accent-glow);
+          transform: translateY(-4px);
+          box-shadow: 0 14px 26px rgba(15, 23, 42, 0.14);
           transition-delay: 0s;
         }
         .experience__card:hover::before {

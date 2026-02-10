@@ -3,33 +3,21 @@ import { useInView } from "../hooks/useInView";
 
 export default function About() {
   const [ref, inView] = useInView({ threshold: 0.1 });
+
   return (
     <section
       className={`about ${inView ? "section--in-view" : ""}`}
       id="about"
       ref={ref}
     >
-      <h2 className="section-title">
-        About <span>Me</span>
-      </h2>
-      <div className="about__grid">
-        <div className="about__image-wrap">
-          <img
-            src={config.profileImage}
-            alt="Kavya Mehta"
-            className="about__image"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = `https://github.com/${config.github}.png`;
-              e.target.alt = "Profile";
-            }}
-          />
-          <div className="about__frame" aria-hidden="true" />
-        </div>
+      <div className="about__container">
+        <h2 className="section-title">
+          About <span>Me</span>
+        </h2>
         <div className="about__text">
           <p className="about__lead">
-            I&apos;m a passionate <strong>software engineer</strong> and{"  "}
-            <strong>data enthusiast</strong> with hands-on experience in{"  "}
+            I&apos;m a passionate <strong>software engineer</strong> and{" "}
+            <strong>data enthusiast</strong> with hands-on experience in{" "}
             <strong>full-stack development</strong> and{" "}
             <strong>scalable data solutions</strong>.
           </p>
@@ -58,54 +46,31 @@ export default function About() {
         </div>
       </div>
       <style>{`
-        .about__grid {
-          display: grid;
-          gap: 2.5rem;
-          align-items: start;
+        .about {
+          margin-top: 3.5rem;
         }
-        @media (min-width: 768px) {
-          .about__grid { grid-template-columns: 260px 1fr; gap: 3rem; }
-        }
-        .about__image-wrap {
-          position: relative;
-          width: 100%;
-          max-width: 260px;
+        .about__container {
+          max-width: 900px;
           margin: 0 auto;
-          animation: float-image 6s ease-in-out infinite;
         }
-        @keyframes float-image {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
+        .about__text {
+          display: flex;
+          flex-direction: column;
+          gap: 1.2rem;
         }
-        .about__image {
-          width: 100%;
-          aspect-ratio: 1;
-          object-fit: cover;
-          border-radius: 16px;
-          display: block;
-          box-shadow: 0 8px 32px var(--accent-glow);
-          transition: box-shadow 0.3s ease;
+        .about__lead {
+          font-size: 1.05rem;
+          color: var(--text);
+          font-weight: 600;
+          line-height: 1.7;
         }
-        .about__image:hover {
-          box-shadow: 0 16px 48px var(--accent-glow);
+        .about__lead strong {
+          color: var(--accent);
         }
-        .about__frame {
-          position: absolute;
-          inset: -6px;
-          border: 2px solid var(--accent);
-          border-radius: 18px;
-          opacity: 0.5;
-          z-index: -1;
-          animation: rotate-border 8s linear infinite;
+        .about__text p {
+          color: var(--text-muted);
+          line-height: 1.7;
         }
-        @keyframes rotate-border {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        .about__text { display: flex; flex-direction: column; gap: 1.2rem; }
-        .about__lead { font-size: 1.15rem; color: var(--text); font-weight: 600; line-height: 1.6; }
-        .about__lead strong { color: var(--accent); }
-        .about__text p { color: var(--text-muted); line-height: 1.7; }
       `}</style>
     </section>
   );

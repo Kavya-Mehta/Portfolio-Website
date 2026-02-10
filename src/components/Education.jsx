@@ -7,12 +7,10 @@ const EDUCATION = [
     field: "Information Systems",
     period: "Sep 2024 - Apr 2026",
     location: "Boston, MA",
+    logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzaMQkzC-6tzQj8T8EJnGoWzDtNGsiI9i-6A&s",
     highlights: [
-      "Data Science Engineering",
-      "Program Structures & Algorithms",
-      "Cloud Computing",
-      "Web Development",
-      "Application Engineering",
+      "Specialization in data engineering, cloud infrastructure, and scalable data systems",
+      "Advanced coursework in database design, algorithms, and application development",
     ],
   },
   {
@@ -21,11 +19,10 @@ const EDUCATION = [
     field: "Electronics and Telecommunications",
     period: "2022 - 2024",
     location: "Mumbai, India",
+    logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWFvTad6gAX0GtUSqjXKmiQ9sJx9z1i5YY6g&s",
     highlights: [
-      "Database Management Systems",
-      "Cloud Computing and Security",
-      "Data Compression and Cryptography",
-      "Digital Signal Processing",
+      "Comprehensive foundation in database systems, cloud computing, and security",
+      "Strong technical background in data structures, algorithms, and signal processing",
     ],
   },
 ];
@@ -39,51 +36,100 @@ export default function Education() {
       id="education"
       ref={ref}
     >
-      <h2 className="section-title">
-        <span>Education</span>
-      </h2>
-      <div className="education__list">
-        {EDUCATION.map((item, i) => (
-          <div key={i} className="education__card" style={{ "--i": i }}>
-            <div className="education__header">
-              <div className="education__info">
-                <h3 className="education__degree">{item.degree}</h3>
-                <p className="education__school">{item.school}</p>
-                <p className="education__location">{item.location}</p>
+      <div className="education__layout">
+        <div className="education__intro">
+          <h2 className="section-title">
+            <span>Education</span>
+          </h2>
+        </div>
+        <div className="education__list">
+          {EDUCATION.map((item, i) => (
+            <div key={i} className="education__card" style={{ "--i": i }}>
+              <div className="education__header">
+                <button
+                  type="button"
+                  className="education__logo"
+                  aria-label={`${item.school} logo`}
+                >
+                  {item.logo ? (
+                    <img
+                      src={item.logo}
+                      alt=""
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
+                    />
+                  ) : (
+                    <span>{item.school?.[0]}</span>
+                  )}
+                </button>
+                <div className="education__info">
+                  <h3 className="education__degree">
+                    {item.degree} {item.field ? `- ${item.field}` : ""}
+                  </h3>
+                  <p className="education__school">{item.school}</p>
+                  <p className="education__meta">
+                    <span>{item.location}</span>
+                    <span className="education__dot">•</span>
+                    <span>{item.period}</span>
+                    {item.gpa && (
+                      <>
+                        <span className="education__dot">•</span>
+                        <span className="education__gpa-inline">GPA: {item.gpa}</span>
+                      </>
+                    )}
+                  </p>
+                </div>
               </div>
-              <span className="education__period">{item.period}</span>
+              {item.highlights && (
+                <ul className="education__highlights">
+                  {item.highlights.map((h, j) => (
+                    <li key={j}>
+                      <span className="education__bullet" aria-hidden="true">
+                        ▸
+                      </span>
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
-            <p className="education__field">{item.field}</p>
-            {item.gpa && <p className="education__gpa">GPA: {item.gpa}</p>}
-            {item.highlights && (
-              <ul className="education__highlights">
-                {item.highlights.map((h, j) => (
-                  <li key={j}>{h}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       <style>{`
+        .education__layout {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+        .education__intro {
+          position: relative;
+          max-width: 900px;
+          margin: 0 auto;
+          width: 100%;
+        }
         .education__list {
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1.35rem;
+          max-width: 900px;
+          margin: 0 auto;
+          width: 100%;
         }
         .education__card {
-          background: rgba(19, 24, 31, 0.4);
+          background: var(--bg-card);
           border: 1px solid var(--border);
-          border-radius: 14px;
-          padding: 1.5rem;
-          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          border-radius: 16px;
+          padding: 1.6rem 1.8rem;
+          transition: all 0.25s ease;
           transition-delay: calc(var(--i, 0) * 0.1s);
           opacity: 0;
           transform: translateY(16px);
-          backdrop-filter: blur(12px);
           position: relative;
           overflow: hidden;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
         }
         .education__card::before {
           content: '';
@@ -110,11 +156,26 @@ export default function Education() {
           transform: translateY(0);
         }
         .education__card:hover {
-          background: rgba(34, 211, 238, 0.05);
+          background: var(--bg-card-hover);
           border-color: var(--accent);
-          transform: translateY(-10px);
-          box-shadow: 0 20px 48px var(--accent-glow);
+          transform: translateY(-4px);
+          box-shadow: 0 14px 26px rgba(15, 23, 42, 0.14);
           transition-delay: 0s;
+        }
+        .education__logo {
+          cursor: pointer;
+          border: none;
+        }
+        .education__logo:focus-visible {
+          outline: 2px solid var(--accent);
+          outline-offset: 3px;
+        }
+        .education__logo:focus img,
+        .education__logo:focus-visible img {
+          filter: brightness(1.05) saturate(1.05);
+        }
+        .education__logo:hover img {
+          filter: brightness(1.05) saturate(1.05);
         }
         .education__card:hover::before {
           opacity: 1;
@@ -134,18 +195,41 @@ export default function Education() {
         }
         .education__header {
           display: flex;
-          justify-content: space-between;
           align-items: flex-start;
-          gap: 1rem;
-          margin-bottom: 0.65rem;
+          gap: 1.25rem;
+          margin-bottom: 0.45rem;
           flex-wrap: wrap;
+        }
+        .education__logo {
+          width: 52px;
+          height: 52px;
+          border-radius: 999px;
+          background: rgba(148, 163, 184, 0.12);
+          border: 1px solid rgba(148, 163, 184, 0.25);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          flex: 0 0 auto;
+          margin-top: 0.1rem;
+        }
+        .education__logo img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: brightness(0.75) saturate(0.9);
+          transition: filter 0.25s ease;
+        }
+        .education__logo span {
+          color: var(--text-muted);
+          font-weight: 700;
         }
         .education__info {
           flex: 1;
           min-width: 0;
         }
         .education__degree {
-          font-size: 1.1rem;
+          font-size: 1.08rem;
           color: var(--text);
           font-weight: 700;
           margin-bottom: 0.3rem;
@@ -153,55 +237,42 @@ export default function Education() {
         }
         .education__school {
           color: var(--accent);
-          font-size: 0.9rem;
+          font-size: 0.92rem;
           font-weight: 600;
         }
-        .education__location {
+        .education__meta {
           color: var(--text-muted);
-          font-size: 0.85rem;
-          margin-top: 0.25rem;
+          font-size: 0.86rem;
+          margin-top: 0.3rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          flex-wrap: wrap;
         }
-        .education__period {
-          font-size: 0.85rem;
-          color: var(--text-muted);
-          font-weight: 500;
+        .education__dot {
+          color: rgba(148, 163, 184, 0.6);
         }
-        .education__field {
-          color: var(--text-muted);
-          font-size: 0.9rem;
-          margin-bottom: 0.5rem;
-          font-weight: 500;
-        }
-        .education__gpa {
+        .education__gpa-inline {
           color: var(--accent);
-          font-size: 0.85rem;
-          font-weight: 700;
-          margin-bottom: 0.75rem;
-          display: inline-block;
-          padding: 0.3rem 0.65rem;
-          background: var(--accent-muted);
-          border-radius: 8px;
+          font-weight: 600;
         }
         .education__highlights {
           list-style: none;
-          display: flex;
-          flex-wrap: wrap;
+          display: grid;
           gap: 0.5rem;
+          margin-top: 0.65rem;
         }
         .education__highlights li {
-          padding: 0.45rem 0.8rem;
-          background: var(--accent-muted);
-          border: 1px solid var(--accent);
-          border-radius: 10px;
-          font-size: 0.8rem;
-          color: var(--accent);
-          font-weight: 600;
-          transition: all 0.2s ease;
+          display: flex;
+          align-items: flex-start;
+          gap: 0.6rem;
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          font-weight: 500;
         }
-        .education__highlights li:hover {
-          background: var(--accent);
-          color: #0c0f14;
-          transform: scale(1.05);
+        .education__bullet {
+          color: var(--accent);
+          font-size: 0.9rem;
         }
         @media (max-width: 640px) {
           .education__card {
@@ -211,8 +282,12 @@ export default function Education() {
             font-size: 1rem;
           }
           .education__header {
-            flex-direction: column;
-            gap: 0.5rem;
+            flex-direction: row;
+            gap: 0.85rem;
+          }
+          .education__logo {
+            width: 46px;
+            height: 46px;
           }
         }
       `}</style>

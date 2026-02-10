@@ -3,6 +3,7 @@ import { config } from "./config";
 import { useActiveSection } from "./hooks/useActiveSection";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import About from "./components/About";
 import Experience from "./components/Experience";
 import Education from "./components/Education";
 import Skills from "./components/Skills";
@@ -15,7 +16,7 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem("theme");
-    return saved || "dark";
+    return saved || "light";
   });
   const activeSection = useActiveSection();
 
@@ -36,20 +37,15 @@ export default function App() {
 
   return (
     <>
-      <div className="grain" aria-hidden="true" />
       <ScrollProgress />
-      <Navbar
-        scrolled={scrolled}
-        activeSection={activeSection}
-        theme={theme}
-        setTheme={setTheme}
-      />
+      <Navbar scrolled={scrolled} activeSection={activeSection} />
       <main>
         <Hero />
-        <Experience />
+        <About />
         <Education />
-        <Skills />
+        <Experience />
         <Projects />
+        <Skills />
         <Contact />
       </main>
       <BackToTop />
