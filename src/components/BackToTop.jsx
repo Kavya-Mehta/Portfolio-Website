@@ -34,7 +34,7 @@ export default function BackToTop() {
           height: 48px;
           border-radius: 50%;
           background: var(--accent);
-          color: #0c0f14;
+          color: #fff;
           border: none;
           cursor: pointer;
           box-shadow: 0 4px 24px var(--accent-glow);
