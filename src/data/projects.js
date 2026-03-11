@@ -52,7 +52,9 @@ export const projects = [
       "Executed Monte Carlo simulations generating probabilistic predictions with 72% accuracy for podium finishes",
     ],
     alwaysExpanded: true,
-    links: [],
+    links: [
+      { label: "GitHub", url: `${GITHUB}/F1-Championship-Bayesian-Predictor` },
+    ],
     size: "medium",
   },
   {
