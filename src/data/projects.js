@@ -29,26 +29,6 @@ export const projects = [
     size: "large",
   },
   {
-    id: "cinematic",
-    title: "AI-Driven Cinematic Storytelling Pipeline",
-    period: "Sep 2025 – Oct 2025",
-    tech: ["Python", "Pandas", "NumPy", "OpenCV", "Generative AI", "Jupyter"],
-    summary:
-      "Built an award-winning Python pipeline that reimagined a fashion film as psychological horror through automated scene sequencing, AI-generated visuals, and emotion-driven data manipulation. Utilized PIL, OpenCV, and rule-based workflows for creative narrative transformation.",
-    highlights: [
-      "Designed a Python-based creative data pipeline that reimagines a classic fashion film as a psychological horror narrative through logic-driven storytelling",
-      "Automated scene sequencing, dialogue transformation, and narrative pacing using Python scripting and rule-based workflows",
-      "Generated cinematic visuals using image processing techniques with PIL and OpenCV, enhanced by generative AI models",
-      "Applied data manipulation and visualization techniques to support emotion-driven narrative experimentation and creative analysis",
-      "Awarded Best Innovation in Creative Coding and Storytelling Excellence as part of INFO 6105 coursework",
-    ],
-    alwaysExpanded: true,
-    links: [
-      { label: "View Code", url: `${GITHUB}/Data-Science-Movie-Project` },
-    ],
-    size: "medium",
-  },
-  {
     id: "movie",
     title: "Movie Analytics Data Pipeline",
     period: "Jan 2026 – Feb 2026",
@@ -64,6 +44,27 @@ export const projects = [
     ],
     alwaysExpanded: true,
     links: [],
+    size: "medium",
+  },
+  {
+    id: "aws",
+    title: "AWS Cloud Infrastructure Setup",
+    period: "Jan 2025 – Apr 2025",
+    tech: ["AWS", "Terraform", "Networking"],
+    summary:
+      "Built automated CI/CD pipeline with GitHub Actions, Packer, and Terraform, reducing deployment effort by 60%. Provisioned multi-AZ AWS infrastructure with auto-scaling, load balancing across EC2 instances, CloudWatch monitoring, and Route 53 DNS configuration achieving 99.9% fault tolerance.",
+    highlights: [
+      "Deployed CI/CD pipeline with GitHub Actions, Packer, and Terraform reducing manual deployment effort by 60% and ensuring reliable, production-ready cloud deployments",
+      "Provisioned secure AWS infrastructure across 3 availability zones and configured CloudWatch Agent in AMIs for monitoring 15+ metrics",
+      "Enabled auto-scaling with Launch Templates and Auto Scaling Groups using CPU utilization-based policies",
+      "Deployed Application Load Balancer to evenly distribute HTTP traffic across 4 EC2 instances and ensure 99.9% application fault tolerance",
+      "Configured Route 53 with domain and subdomains (dev/demo) for DNS-based access and secure, load balanced routing",
+    ],
+    alwaysExpanded: true,
+    unifiedRepos: [
+      { label: "Cloud App", url: `${GITHUB}/Cloud-Native-Webapp` },
+      { label: "Infra", url: `${GITHUB}/aws-terraform-infra` },
+    ],
     size: "large",
   },
   {
@@ -85,23 +86,22 @@ export const projects = [
     size: "medium",
   },
   {
-    id: "aws",
-    title: "AWS Cloud Infrastructure Setup",
-    period: "Jan 2025 – Apr 2025",
-    tech: ["AWS", "Terraform", "Networking"],
+    id: "cinematic",
+    title: "AI-Driven Cinematic Storytelling Pipeline",
+    period: "Sep 2025 – Oct 2025",
+    tech: ["Python", "Pandas", "NumPy", "OpenCV", "Generative AI", "Jupyter"],
     summary:
-      "Built automated CI/CD pipeline with GitHub Actions, Packer, and Terraform, reducing deployment effort by 60%. Provisioned multi-AZ AWS infrastructure with auto-scaling, load balancing across EC2 instances, CloudWatch monitoring, and Route 53 DNS configuration achieving 99.9% fault tolerance.",
+      "Built an award-winning Python pipeline that reimagined a fashion film as psychological horror through automated scene sequencing, AI-generated visuals, and emotion-driven data manipulation. Utilized PIL, OpenCV, and rule-based workflows for creative narrative transformation.",
     highlights: [
-      "Deployed CI/CD pipeline with GitHub Actions, Packer, and Terraform reducing manual deployment effort by 60% and ensuring reliable, production-ready cloud deployments",
-      "Provisioned secure AWS infrastructure across 3 availability zones and configured CloudWatch Agent in AMIs for monitoring 15+ metrics",
-      "Enabled auto-scaling with Launch Templates and Auto Scaling Groups using CPU utilization-based policies",
-      "Deployed Application Load Balancer to evenly distribute HTTP traffic across 4 EC2 instances and ensure 99.9% application fault tolerance",
-      "Configured Route 53 with domain and subdomains (dev/demo) for DNS-based access and secure, load balanced routing",
+      "Designed a Python-based creative data pipeline that reimagines a classic fashion film as a psychological horror narrative through logic-driven storytelling",
+      "Automated scene sequencing, dialogue transformation, and narrative pacing using Python scripting and rule-based workflows",
+      "Generated cinematic visuals using image processing techniques with PIL and OpenCV, enhanced by generative AI models",
+      "Applied data manipulation and visualization techniques to support emotion-driven narrative experimentation and creative analysis",
+      "Awarded Best Innovation in Creative Coding and Storytelling Excellence as part of INFO 6105 coursework",
     ],
     alwaysExpanded: true,
-    unifiedRepos: [
-      { label: "Cloud App", url: `${GITHUB}/Cloud-Native-Webapp` },
-      { label: "Infra", url: `${GITHUB}/aws-terraform-infra` },
+    links: [
+      { label: "View Code", url: `${GITHUB}/Data-Science-Movie-Project` },
     ],
     size: "large",
   },
