@@ -6,12 +6,26 @@ const EXPERIENCE = [
     role: "Data Engineer",
     type: "Internship",
     period: "Jan 2024 - Jun 2024",
+    highlights: [
+      "Built and maintained scalable ETL/ELT pipelines consolidating 5 data sources including relational databases and REST APIs, processing 10K+ monthly records with automated data validation and governance controls.",
+      "Designed dimensional data warehouse schemas for 18 months of transactional sales data across 50+ SKUs, reducing query complexity and enabling self-serve analytics for 3 business teams.",
+      "Implemented CDC-based incremental replication across 5+ warehouse tables, eliminating full-refresh overhead and improving real-time data availability for downstream consumers.",
+      "Enforced pre-ingestion data quality and cleansing rules across all source feeds, cutting inconsistent warehouse loads by 25% and strengthening data reliability.",
+      "Standardized 12 KPI definitions through reusable SQL reporting views adopted across all business teams, eliminating ad-hoc query duplication and ensuring consistent metric output.",
+      "Collaborated with business stakeholders to translate data requirements into SQL-optimized pipeline solutions, accelerating production execution by 25%.",
+    ],
   },
   {
     company: "Vartak Computers",
     role: "Web Development Intern",
     type: "Internship",
     period: "May 2021 - Oct 2021",
+    highlights: [
+      "Developed backend infrastructure for 3 client applications serving 500+ users, implementing REST APIs between MySQL databases and product operations to support structured data storage and retrieval.",
+      "Authored SQL extraction queries processing 50K+ monthly records, converting raw application data into dashboard-ready datasets for operational reporting.",
+      "Built Python automation scripts eliminating repetitive backend workflows across 3 applications, saving 6+ hours of manual effort weekly.",
+      "Optimized relational database performance through indexing strategies, reducing data retrieval latency across all client-facing production environments.",
+    ],
   },
 ];
 
@@ -39,6 +53,13 @@ export default function Experience() {
               <p className="experience__company">{item.company}</p>
               {item.period !== "—" && (
                 <p className="experience__period">{item.period}</p>
+              )}
+              {item.highlights?.length > 0 && (
+                <ul className="experience__highlights">
+                  {item.highlights.map((point, idx) => (
+                    <li key={idx}>{point}</li>
+                  ))}
+                </ul>
               )}
             </div>
           ))}
@@ -132,6 +153,18 @@ export default function Experience() {
           color: var(--text-muted);
           font-size: 0.85rem;
           margin-top: 0.25rem;
+        }
+        .experience__highlights {
+          margin-top: 0.9rem;
+          padding-left: 1.1rem;
+          display: grid;
+          gap: 0.45rem;
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          line-height: 1.5;
+        }
+        .experience__highlights li::marker {
+          color: var(--accent);
         }
         @media (max-width: 640px) {
           .experience__card {
