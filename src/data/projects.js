@@ -2,6 +2,33 @@ const GITHUB = "https://github.com/Kavya-Mehta";
 
 export const projects = [
   {
+    id: "interview",
+    title: "AI-Powered Interview Simulator",
+    period: "Feb 2026 – Present",
+    tech: [
+      "Python",
+      "LangChain",
+      "OpenAI",
+      "Claude",
+      "Gemini",
+      "FastAPI",
+      "React 19",
+    ],
+    summary:
+      "Built an AI-powered mock interview platform that simulates real interview experiences using GPT-4. Supports resume-based personalization, configurable interview types and difficulty levels, and tracks session history across a 4-table PostgreSQL schema. Features JWT authentication, 15+ REST endpoints, and a React 19 frontend with real-time streaming responses.",
+    highlights: [
+      "Launched a full-stack interview platform using FastAPI and React 19 across Technical, Behavioral, and Mixed modes with 3 levels",
+      "Engineered GPT-4 prompt pipelines via LangChain with role-based prompting, few-shot learning, and chain-of-thought reasoning",
+      "Implemented real-time streaming response delivery and session completion detection, reducing perceived latency for end users",
+      "Secured 15+ REST API endpoints with PyJWT and SHA-256 salted hashing, backed by a 4-table PostgreSQL schema with auto-initialization",
+    ],
+    alwaysExpanded: true,
+    links: [
+      { label: "View Code", url: `${GITHUB}/AI-POWERED-INTERVIEW-SIMULATOR` },
+    ],
+    size: "large",
+  },
+  {
     id: "cinematic",
     title: "AI-Driven Cinematic Storytelling Pipeline",
     period: "Sep 2025 – Oct 2025",
