@@ -10,9 +10,9 @@ const EXPERIENCE = [
       "Built and maintained scalable ETL/ELT pipelines consolidating 5 data sources including relational databases and REST APIs, processing 10K+ monthly records with automated data validation and governance controls.",
       "Designed dimensional data warehouse schemas for 18 months of transactional sales data across 50+ SKUs, reducing query complexity and enabling self-serve analytics for 3 business teams.",
       "Implemented CDC-based incremental replication across 5+ warehouse tables, eliminating full-refresh overhead and improving real-time data availability for downstream consumers.",
-      "Enforced pre-ingestion data quality and cleansing rules across all source feeds, cutting inconsistent warehouse loads by 25% and strengthening data reliability.",
+      "Enforced pre-ingestion data quality and cleansing rules across all source feeds, cutting inconsistent warehouse loads by 8% and strengthening data reliability.",
       "Standardized 12 KPI definitions through reusable SQL reporting views adopted across all business teams, eliminating ad-hoc query duplication and ensuring consistent metric output.",
-      "Collaborated with business stakeholders to translate data requirements into SQL-optimized pipeline solutions, accelerating production execution by 25%.",
+      "Collaborated with business stakeholders to translate data requirements into SQL-optimized pipeline solutions, accelerating production execution by 6%.",
     ],
   },
   {

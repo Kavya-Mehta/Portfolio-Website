@@ -17,7 +17,7 @@ const EDUCATION = [
     school: "St Francis Institute of Technology",
     degree: "Bachelor of Engineering",
     field: "Electronics and Telecommunications",
-    period: "2022 - 2024",
+    period: "2021 - 2024",
     location: "Mumbai, India",
     logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWFvTad6gAX0GtUSqjXKmiQ9sJx9z1i5YY6g&s",
     highlights: [
